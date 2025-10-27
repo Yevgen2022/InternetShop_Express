@@ -1,0 +1,70 @@
+# =========================
+# Node / Express SSR app
+# =========================
+
+# Node modules
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+bun.lockb
+
+# Build output
+dist/
+build/
+.next/
+out/
+.tmp/
+.cache/
+coverage/
+logs/
+*.log
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# OS / Editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Dependency caches
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# TypeScript
+*.tsbuildinfo
+
+# Serverless / Deployment artifacts
+.vercel/
+.netlify/
+.railway/
+serverless/
+
+# PM2 / Nodemon / Debug
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Temporary uploads or runtime files
+uploads/
+tmp/
+temp/
+
+# Optional: if you compile frontend assets inside project
+public/build/
+public/assets/
+
+# Optional: Prisma / ORM generated
+prisma/generated/
+prisma/migrations/dev.db
