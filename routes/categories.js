@@ -1,13 +1,16 @@
 const express = require('express');
 const router = express.Router();
 
-const data = require('../data/data.json');
+// const data = require('../data/data.json');
 
 /* GET category page. */
 router.get('/', function(req, res, next) {
+
+    //work with DB
+
   res.render('categories', {
       title: 'All Categories',
-      data: data
+      // data: data
   });
 });
 
