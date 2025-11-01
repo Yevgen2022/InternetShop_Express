@@ -1,15 +1,13 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  h2= secondTitle
-  p Hello in #{secondTitle}
-    div.row
+  h1.text-3xl.font-bold.mb-6.text-center Category
+
+    div(class="grid gap-6 px-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5")
       each val, index in data
-        div
-          div
-            h4
-              a(href=`/categories/${val.url}`)= val.title
+        div(class="bg-white rounded-xl shadow-md.hover:shadow-lg transition-all duration-300 text-center.p-4")
+          div.mb-3
             div
-              img(src=`/images/categories/${val.image}`)
+              img(src=`/images/categories/${val.image}` alt=val.title class="w-full h-48 object-contain rounded-lg")
+            h4.text-xl.font-semibold.text-gray-800
+              a(href=`/categories/${val.url}` class="hover:text-blue-500 transition-colors")= val.title

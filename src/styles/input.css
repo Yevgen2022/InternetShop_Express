@@ -8,10 +8,22 @@
     }
 
     body {
-        @apply bg-gray-50 text-gray-900 font-sans p-8;
+        @apply bg-gray-300 text-gray-500 font-sans p-8;
     }
 
-    li {
-        @apply text-2xl font-bold text-red-600;
+    a {
+        @apply font-bold;
+    }
+
+    /*li {*/
+    /*    @apply text-2xl font-bold text-red-600;*/
+    /*}*/
+
+}
+
+@layer components {
+
+    .a-header {
+        @apply text-3xl text-amber-600 hover:underline;
     }
 }

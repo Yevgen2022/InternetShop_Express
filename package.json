@@ -11,6 +11,7 @@
     "build:css": "tailwindcss -i src/styles/input.css -o ./public/stylesheets/styles.css --minify --content \"./views/**/*.pug,./public/**/*.js,./src/**/*.js,./src/**/*.ts\""
   },
   "dependencies": {
+    "@tailwindcss/line-clamp": "^0.4.4",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
