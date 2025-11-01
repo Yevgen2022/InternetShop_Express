@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        @apply scroll-smooth;
+    }
+
+    body {
+        @apply bg-gray-50 text-gray-900 font-sans p-8;
+    }
+
+    li {
+        @apply text-2xl font-bold text-red-600;
+    }
+}

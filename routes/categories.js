@@ -27,14 +27,17 @@ router.get('/', async function (req, res, next) {
 /* GET category page. */
 router.get('/:category_name', async function (req, res, next) {
     console.log(req.params);
-    const catName = req.params.category_name;
+     const catName = req.params.category_name;
+
 
     const query = categoryQuery.get_single_cat;
+    // const query = 'select * from category where id = ?';
     const connection = await mysql.createConnection(CONFIG);
     const [data] = await connection.execute(query, [catName]);
     connection.end;
 
     console.log(data);
+// res.json({"data": data});
 
     res.render('single_category', {data: data[0]});
 });

@@ -68,3 +68,6 @@ public/assets/
 # Optional: Prisma / ORM generated
 prisma/generated/
 prisma/migrations/dev.db
+
+# Files
+*.txt
