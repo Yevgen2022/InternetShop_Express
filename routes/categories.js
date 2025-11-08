@@ -30,16 +30,22 @@ router.get('/:category_name', async function (req, res, next) {
      const catName = req.params.category_name;
 
 
-    const query = categoryQuery.get_single_cat;
-    // const query = 'select * from category where id = ?';
+    let query = categoryQuery.get_single_cat;
     const connection = await mysql.createConnection(CONFIG);
     const [data] = await connection.execute(query, [catName]);
-    connection.end;
 
-    console.log(data);
-// res.json({"data": data});
+    query = "SELECT * FROM products LEFT JOIN products_lang ON products_lang.product_id = products.product_id WHERE products.category_id = ? and products_lang.lang = 'ua'";
 
-    res.render('single_category', {data: data[0]});
+    const [products] = await connection.execute(query, [data[0].category_id]);
+
+    connection.end();
+
+    console.log(data[0].category_id);
+
+    res.render('single_category', {
+        "data": data[0],
+        "products": products
+    });
 });
 
 module.exports = router;

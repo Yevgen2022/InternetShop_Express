@@ -27,19 +27,19 @@ SET time_zone = "+00:00";
 -- Table structure for table `goods_lang`
 --
 
-CREATE TABLE `goods_lang` (
+CREATE TABLE `products_lang` (
   `id` int(11) NOT NULL,
   `lang` varchar(5) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `gid` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
   `title` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `text` text COLLATE utf8mb4_unicode_ci NOT NULL
+  `description` text COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `goods_lang`
 --
 
-INSERT INTO `goods_lang` (`id`, `lang`, `gid`, `title`, `text`) VALUES
+INSERT INTO `products_lang` (`id`, `lang`, `product_id`, `title`, `description`) VALUES
 (1, 'ua', 1, 'Ноутбук Lenovo IdeaPad Slim 5 16IAH8 (83BG001ARA) Cloud Grey / 16\" IPS WUXGA / Intel Core i5-12450H / RAM 16 ГБ / SSD 512 ГБ / Підсвічування клавіатури / Зарядка через Type-C', 'Екран 16\" IPS (1920x1200) WUXGA, матовий / Intel Core i5-12450H (2.0 - 4.4 ГГц) / RAM 16 ГБ / SSD 512 ГБ / Intel UHD Graphics / без ОД / Wi-Fi / Bluetooth / веб-камера / без ОС / 1.89 кг / сірий'),
 (2, 'ua', 2, 'Ноутбук Acer Aspire 7 A715-76G-56U7 (NH.QN4EU.001) Charcoal Black / 15.6\" IPS Full HD / Intel Core i5-12450H / RAM 16 ГБ / SSD 512 ГБ / nVidia GeForce RTX 2050, 4 ГБ / Підсвітка клавіатури + 1000 бонусних ₴ за відеовідгук', 'Екран 15.6\" IPS (1920x1080) Full HD, матовий / Intel Core i5-12450H (2.0 - 4.4 ГГц) / RAM 16 ГБ / SSD 512 ГБ / nVidia GeForce RTX 2050, 4 ГБ / без ОД / LAN / Wi-Fi / Bluetooth / веб-камера / без ОС / 2.1 кг / чорний'),
 (3, 'ua', 3, 'Ноутбук ASUS TUF Gaming A15 FA507NU-LP105 (90NR0EB8-M00BZ0) Jaeger Gray / 15.6\" IPS Full HD 144 Гц / AMD Ryzen 5 7535HS / RAM 16 ГБ / SSD 512 ГБ / nVidia GeForce RTX 4050, 6 ГБ /', 'Екран 15.6\" IPS (1920x1080) Full HD 144 Гц, матовий / AMD Ryzen 5 7535HS (3.3 - 4.55 ГГц) / RAM 16 ГБ / SSD 512 ГБ / nVidia GeForce RTX 4050, 6 ГБ / без ОД / LAN / Wi-Fi / Bluetooth / веб-камера / без ОС / 2.2 кг / сірий із чорним'),
@@ -76,7 +76,7 @@ INSERT INTO `goods_lang` (`id`, `lang`, `gid`, `title`, `text`) VALUES
 --
 -- Indexes for table `goods_lang`
 --
-ALTER TABLE `goods_lang`
+ALTER TABLE `products_lang`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -86,7 +86,7 @@ ALTER TABLE `goods_lang`
 --
 -- AUTO_INCREMENT for table `goods_lang`
 --
-ALTER TABLE `goods_lang`
+ALTER TABLE `products_lang`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 COMMIT;
 
