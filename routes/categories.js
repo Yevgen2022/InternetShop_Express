@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-const mysql = require('mysql2/promise');
-const CONFIG = require('../db/config');
 const categoryQuery = require('../db/query');
 
 // const data = require('../data/data.json');
@@ -11,11 +9,8 @@ const categoryQuery = require('../db/query');
 router.get('/', async function (req, res, next) {
 
     //work with DB
-    const connection = await mysql.createConnection(CONFIG);
     const query = categoryQuery.get_cats;
-    const [data] = await connection.execute(query);
-    connection.end();
-    // console.log(data);
+    const [data] = await res.locals.db.execute(query);
 
     res.render('categories', {
         title: 'All Categories',
@@ -31,14 +26,11 @@ router.get('/:categoryName', async function (req, res, next) {
 
 
     let query = categoryQuery.get_single_cat;
-    const connection = await mysql.createConnection(CONFIG);
-    const [data] = await connection.execute(query, [catName]);
+    const [data] = await res.locals.db.execute(query, [catName]);
 
     query = "SELECT * FROM products LEFT JOIN products_lang ON products_lang.product_id = products.product_id WHERE products.category_id = ? and products_lang.lang = 'ua'";
 
-    const [products] = await connection.execute(query, [data[0].category_id]);
-
-    connection.end();
+    const [products] = await res.locals.db.execute(query, [data[0].category_id]);
 
     console.log(data[0].category_id);
 
@@ -57,22 +49,18 @@ router.get('/:categoryName/:productName', async function (req, res, next) {
 
 //get info about category
     let query = categoryQuery.get_single_cat;
-    const connection = await mysql.createConnection(CONFIG);
-    const [categories] = await connection.execute(query, [catName]);
+    const [categories] = await res.locals.db.execute(query, [catName]);
 
 //get info about all products of category
     query = "SELECT * FROM products LEFT JOIN products_lang ON products_lang.product_id = products.product_id WHERE products.product_url = ? and products_lang.lang = 'ua'";
 
-    const [products] = await connection.execute(query, [prodName]);
+    const [products] = await res.locals.db.execute(query, [prodName]);
 
 //we are getting the products from the same category
     query = "SELECT * FROM products LEFT JOIN products_lang ON products_lang.product_id = products.product_id WHERE products.category_id = ? and products_lang.lang = 'ua' " +
         "ORDER BY rand() LIMIT 4";
 
-    const [sameProducts] = await connection.execute(query, [categories[0].category_id]);
-
-
-    connection.end();
+    const [sameProducts] = await res.locals.db.execute(query, [categories[0].category_id]);
 
     console.log(products);
 

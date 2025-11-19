@@ -8,7 +8,21 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const catRouter = require('./routes/categories');
 
+//import properties about connection to DB
+const mysql = require('mysql2/promise');
+const CONFIG = require('./db/config');
+
+
 const app = express();
+
+
+app.use(async(req,res,next)=>{
+    if (!res.locals.db){
+        res.locals.db = await mysql.createPool(CONFIG);
+    }
+    next();
+});
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
