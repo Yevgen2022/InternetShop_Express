@@ -14,7 +14,7 @@ router.get('/', async function (req, res, next) {
     const connection = await mysql.createConnection(CONFIG);
     const query = categoryQuery.get_cats;
     const [data] = await connection.execute(query);
-    connection.end;
+    connection.end();
     // console.log(data);
 
     res.render('categories', {
@@ -24,10 +24,10 @@ router.get('/', async function (req, res, next) {
 });
 
 
-/* GET category page. */
-router.get('/:category_name', async function (req, res, next) {
+/* GET single category page. */
+router.get('/:categoryName', async function (req, res, next) {
     console.log(req.params);
-     const catName = req.params.category_name;
+     const catName = req.params.categoryName;
 
 
     let query = categoryQuery.get_single_cat;
@@ -42,10 +42,46 @@ router.get('/:category_name', async function (req, res, next) {
 
     console.log(data[0].category_id);
 
-    res.render('single_category', {
+    res.render('singleCategory', {
         "data": data[0],
         "products": products
     });
 });
+
+
+/* GET single product page. */
+router.get('/:categoryName/:productName', async function (req, res, next) {
+    console.log(req.params);
+    const catName = req.params.categoryName; //url of category
+    const prodName = req.params.productName; //url of product
+
+//get info about category
+    let query = categoryQuery.get_single_cat;
+    const connection = await mysql.createConnection(CONFIG);
+    const [categories] = await connection.execute(query, [catName]);
+
+//get info about all products of category
+    query = "SELECT * FROM products LEFT JOIN products_lang ON products_lang.product_id = products.product_id WHERE products.product_url = ? and products_lang.lang = 'ua'";
+
+    const [products] = await connection.execute(query, [prodName]);
+
+//we are getting the products from the same category
+    query = "SELECT * FROM products LEFT JOIN products_lang ON products_lang.product_id = products.product_id WHERE products.category_id = ? and products_lang.lang = 'ua' " +
+        "ORDER BY rand() LIMIT 4";
+
+    const [sameProducts] = await connection.execute(query, [categories[0].category_id]);
+
+
+    connection.end();
+
+    console.log(products);
+
+    res.render('singleProduct', {
+        "categories": categories[0],
+        "products": products[0],
+        sameProducts: sameProducts,
+    });
+});
+
 
 module.exports = router;

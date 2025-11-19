@@ -3,9 +3,10 @@ html
   head
     title= title
     link(rel="stylesheet", href=`/stylesheets/styles.css?v=${Date.now()}`)
-  body
+  body(class="min-h-screen flex flex-col")
     include partials/header
 
+    main(class="flex-1")
     block content
 
     include partials/footer
