@@ -62,11 +62,17 @@ router.get('/:categoryName/:productName', async function (req, res, next) {
 
     const [sameProducts] = await res.locals.db.execute(query, [categories[0].category_id]);
 
+// get additional product's foto
+    query = "SELECT image_url FROM images WHERE product_id = ? ORDER BY ord asc"
+    const[images] = await res.locals.db.execute(query, [products[0]['product_id']]);
+    console.log(images);
+
     console.log(products);
 
     res.render('singleProduct', {
         "categories": categories[0],
         "products": products[0],
+        "images": images,
         sameProducts: sameProducts,
     });
 });
